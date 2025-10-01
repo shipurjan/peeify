@@ -41,10 +41,17 @@ $SUDO apt install -y imagemagick
 if ! command -v npm &> /dev/null; then
     echo "📦 Node.js/npm not found, installing..."
     $SUDO apt install -y nodejs npm
+
+    # Verify npm is now available
+    if ! command -v npm &> /dev/null; then
+        echo "❌ Error: npm installation failed or not in PATH"
+        echo "Please install Node.js and npm manually and run this script again"
+        exit 1
+    fi
 fi
 
 echo "🔧 Installing autoexif globally..."
-$SUDO npm install -g autoexif
+npm install -g autoexif
 
 echo "✅ Verifying installations..."
 
