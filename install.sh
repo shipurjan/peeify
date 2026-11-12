@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Peeify Installation Script for Debian
-# Installs autoexif and ImageMagick with required libraries
+# Installs ImageMagick and Node.js/npm (autoexif is run on demand via npx)
 
 set -e  # Exit on any error
 
@@ -50,9 +50,6 @@ if ! command -v npm &> /dev/null; then
     fi
 fi
 
-echo "🔧 Installing autoexif globally..."
-npm install -g autoexif
-
 echo "✅ Verifying installations..."
 
 # Verify ImageMagick
@@ -63,11 +60,11 @@ else
     exit 1
 fi
 
-# Verify autoexif
-if command -v autoexif &> /dev/null; then
-    echo "✓ autoexif installed: $(autoexif --version 2>/dev/null || echo 'version not available')"
+# Verify autoexif (fetched on demand via npx; this also warms the npx cache)
+if version=$("$(dirname -- "${BASH_SOURCE[0]}")/autoexif.sh" --version 2>/dev/null); then
+    echo "✓ autoexif available via npx: $version"
 else
-    echo "❌ autoexif installation failed"
+    echo "❌ Could not run autoexif via npx"
     exit 1
 fi
 

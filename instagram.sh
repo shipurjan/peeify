@@ -4,7 +4,7 @@
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 input=$1
-output=$(autoexif -i "$input")
+output=$("$SCRIPT_DIR/autoexif.sh" -i "$input")
 
 srgb_profile="$SCRIPT_DIR/sRGB_v2.2.icc"
 

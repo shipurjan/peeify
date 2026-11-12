@@ -60,7 +60,7 @@ Peeify processes images by:
 ## Dependencies
 
 - **ImageMagick** (`magick` command)
-- **autoexif** - EXIF metadata removal tool
+- **autoexif** - EXIF metadata removal tool, run via `npx` at a pinned version (see `autoexif.sh`; requires Node.js/npm)
 - **sRGB_v2.2.icc** - Color profile (included)
 
 ## Output
