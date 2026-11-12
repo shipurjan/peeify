@@ -5,10 +5,10 @@ A collection of bash scripts for converting and optimizing TIFF images to JPEG f
 ## Overview
 
 Peeify processes images by:
-1. Removing EXIF metadata using `autoexif`
-2. Applying sRGB color profile correction
-3. Resizing images while maintaining aspect ratio
-4. Compressing to JPEG with 90% quality
+1. Applying sRGB color profile correction
+2. Resizing images while maintaining aspect ratio
+3. Compressing to JPEG with 90% quality
+4. Restoring cleaned metadata from the original using `autoexif --tags-from` (ImageMagick drops all EXIF when converting from TIFF)
 
 ## Scripts
 
@@ -67,11 +67,11 @@ Peeify processes images by:
 
 - Original: `image.tif`
 - Processed: `image.p.jpg`
-- Temporary EXIF-stripped file is automatically cleaned up
+- The intermediate JPEG is written to a temporary file and automatically cleaned up
 
 ## Technical Details
 
 - **Quality**: 90% JPEG compression
 - **Color Profile**: sRGB v2.2 ICC profile
 - **Resize Strategy**: Maintain aspect ratio, resize to fit within specified dimensions
-- **Metadata**: EXIF data stripped for privacy and reduced file size
+- **Metadata**: Equipment, software, GPS and other extraneous metadata is removed; exposure settings, capture date and copyright are kept (see the [autoexif README](https://github.com/shipurjan/autoexif#preserved-metadata))
